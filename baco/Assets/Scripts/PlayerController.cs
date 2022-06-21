@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Camera _mainCamera;
     private Vector2 _moveInput;
     private Rigidbody _rigidbody;
-    private object moveMultiplier;
+    public float moveMultiplier;
 
     private void OnEnable()
     {
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnActionTriggered(InputAction.CallbackContext obj)
     {
-        if (obj.action.name.CompareTo(_gameControls.gameplay.move.name) != 0)
+        if (obj.action.name.CompareTo(_gameControls.gameplay.move.name) == 0)
         {
             _moveInput = obj.ReadValue<Vector2>();
         }
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        _rigidbody.AddForce((_mainCamera.transform.forward * _moveInput.y +  _mainCamera.transform.right * _moveInput.x ) * (float) moveMultiplier * Time.deltaTime);
+        _rigidbody.AddForce((_mainCamera.transform.forward * _moveInput.y +  _mainCamera.transform.right * _moveInput.x ) *  moveMultiplier * Time.fixedDeltaTime);
     }
 
     private void FixedUpdate()
