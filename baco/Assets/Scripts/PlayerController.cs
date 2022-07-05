@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public int coins = 0;
+    public TMP_Text coinText;
     private Controls _gameControls;
     private PlayerInput _playerInput;
     private Camera _mainCamera;
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             coins++;
+            coinText.text = coins.ToString();
             Destroy(other.gameObject);
         }
     }
